@@ -323,7 +323,18 @@
       "icons": "Icons",
       "notifications": "Notifications",
       "extras": "Extras",
-      "pages": "Pages"
-    }
+      "pages": "Pages",
+      "patients": "Patients",
+      "patientsPages":[
+        {
+          
+        }
+      ]
+    },
+    "Finanace":"Finanace",
+    "FinanaceTaken":"Finanace Taken",
+    "FinanaceGiven":"Finanace Given",
+    "LoanCreate":"Create Loan",
+    "LoanList":"Loan List"
   }
 }

@@ -8,11 +8,14 @@ import {
   faCode,
   faDroplet,
   faGauge,
+  faIndianRupeeSign,
   faLayerGroup,
   faLocationArrow,
   faPencil,
   faPuzzlePiece,
   faRightToBracket,
+  faRupee,
+  faRupeeSign,
 } from '@fortawesome/free-solid-svg-icons'
 import React, { PropsWithChildren } from 'react'
 import { Badge } from 'react-bootstrap'
@@ -36,12 +39,19 @@ export default async function SidebarNav() {
         {dict.sidebar.items.dashboard}
         <small className="ms-auto"><Badge bg="info" className="ms-auto">NEW</Badge></small>
       </SidebarNavItem>
-      <SidebarNavTitle>{dict.sidebar.items.theme}</SidebarNavTitle>
-      <SidebarNavItem icon={faDroplet} href="#">{dict.sidebar.items.colors}</SidebarNavItem>
-      <SidebarNavItem icon={faPencil} href="#">{dict.sidebar.items.typography}</SidebarNavItem>
-      <SidebarNavTitle>{dict.sidebar.items.components}</SidebarNavTitle>
+      
+      <SidebarNavTitle>{dict.sidebar.Finanace}</SidebarNavTitle>
 
-      <SidebarNavGroup toggleIcon={faPuzzlePiece} toggleText={dict.sidebar.items.base}>
+      <SidebarNavGroup toggleIcon={faRupee} toggleText={dict.sidebar.FinanaceGiven}>
+        <SidebarNavItem href="#">{dict.sidebar.items.accordion}</SidebarNavItem>
+        <SidebarNavItem href="#">{dict.sidebar.items.tooltips}</SidebarNavItem>
+      </SidebarNavGroup>
+      <SidebarNavGroup toggleIcon={faIndianRupeeSign} toggleText={dict.sidebar.FinanaceTaken}>
+        <SidebarNavItem href="#">{dict.sidebar.items.accordion}</SidebarNavItem>
+        <SidebarNavItem href="#">{dict.sidebar.items.tooltips}</SidebarNavItem>
+      </SidebarNavGroup>
+      <SidebarNavTitle>{dict.sidebar.items.patients}</SidebarNavTitle>
+      <SidebarNavGroup toggleIcon={faPuzzlePiece} toggleText={dict.sidebar.items.patients}>
         <SidebarNavItem href="#">{dict.sidebar.items.accordion}</SidebarNavItem>
         <SidebarNavItem href="#">{dict.sidebar.items.tooltips}</SidebarNavItem>
       </SidebarNavGroup>

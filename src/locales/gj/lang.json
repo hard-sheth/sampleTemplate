@@ -323,7 +323,18 @@
       "icons": "アイコン",
       "notifications": "通知",
       "extras": "エクストラ",
-      "pages": "ページ"
-    }
+      "pages": "ページ",
+      "patients": "Patients",
+      "patientsPages":[
+        {
+          
+        }
+      ]
+    },
+    "Finanace":"Finanace",
+    "FinanaceTaken":"Finanace Taken",
+    "FinanaceGiven":"Finanace Given",
+    "LoanCreate":"Create Loan",
+    "LoanList":"Loan List"
   }
 }

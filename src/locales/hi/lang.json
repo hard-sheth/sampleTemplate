@@ -323,7 +323,19 @@
       "icons": "图标",
       "notifications": "提醒",
       "extras": "更多组件",
-      "pages": "页面"
-    }
+      "pages": "页面",
+      "patients": "Patients",
+      "patientsPages":[
+        {
+          
+        }
+      ]
+    },
+    "Finanace":"Finanace",
+    "FinanaceTaken":"Finanace Taken",
+    "FinanaceGiven":"Finanace Given",
+    "LoanCreate":"Create Loan",
+    "LoanList":"Loan List"
+    
   }
 }
