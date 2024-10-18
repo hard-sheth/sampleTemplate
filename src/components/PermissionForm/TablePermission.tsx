@@ -1,11 +1,12 @@
-'use client';
+'use client'
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons';
-import useDictionary from '@/locales/dictionary-hook'
 import FileInput from '../FileInput/FileInput';
-export default async function TablePermission({ permission }: { permission: string[] }) {
+import { PermissionCreate } from '@/app/(dashboard)/admin/permission/actions';
+import { toast } from 'react-toastify';
+export default function TablePermission({ permission  }: { permission: string[] }) {
   const arrayofobj = permission.map((item) => {
     return {
       name: item,
@@ -19,7 +20,7 @@ export default async function TablePermission({ permission }: { permission: stri
   });
   const [permissionList, setPermissionList] = useState([...arrayofobj]);
   const [showPass, setShowPass] = useState(false)
-  const { register, control, handleSubmit } = useForm();
+  const { register, control, handleSubmit, reset } = useForm();
   const updateCheckbox = (event: React.ChangeEvent<HTMLInputElement>, permissionName: string) => {
     const copyPermissions = permissionList;
     const findIndex = permissionList.findIndex(item => item.name === permissionName);
@@ -28,11 +29,34 @@ export default async function TablePermission({ permission }: { permission: stri
     copyPermissions[findIndex] = { ...permissionList[findIndex], permission: { ...detailsForPermission } };
     setPermissionList(copyPermissions);
   };
-  const dict = useDictionary()
-  console.log(dict.User_Role);
-  const submitPermission =(data:any)=>{
-    console.log(data, 'data', permissionList);
-    
+  const submitPermission =async(data:any)=>{
+    try {
+      const createNewUser = {...data,permssion: permissionList};
+      const formData = new FormData();
+      for (const [key,value] of Object.entries(createNewUser)) {
+        if(key === 'profilePicture'){
+          formData.append(key,value[0])  
+        }else{
+          formData.append(key,value)
+        }
+      }
+      
+      const promiseUser= PermissionCreate(formData) .then(res=>{
+        reset()
+        setShowPass(false)
+        setPermissionList([])
+      })
+      toast.promise(promiseUser, {
+        pending: "Loading...",
+        success: "Congratulations! User Created",
+        error: "There was an error User Creation!",
+    });
+      // toast.success("Congratulations! User Created")
+     
+    } catch (error) {      
+      setShowPass(false)
+      toast.error("There was an error processing your request.");
+    }
   }
 
   return (
@@ -58,18 +82,6 @@ export default async function TablePermission({ permission }: { permission: stri
             {showPass && <span className="input-group-text" id="password-operation" onClick={() => setShowPass(!showPass)}> <FontAwesomeIcon icon={faEye} fixedWidth /></span>}
             {!showPass && <span className="input-group-text" id="password-operation" onClick={() => setShowPass(!showPass)}><FontAwesomeIcon icon={faEye} fixedWidth /></span>}
           </div>
-        </div>
-        <div className="col-12 col-md-6 mb-2">
-          <label htmlFor="userRole" className="form-label">User Role <span className="text-danger">*</span> </label>
-          <select {...register('userRole')} className='form-select'>
-            {
-              dict.User_Role.map((item, index) => {
-                return (
-                  <option value={item} key={index + 1}>{item}</option>
-                )
-              })
-            }
-          </select>
         </div>
         <Controller
           name='profilepic'
@@ -119,6 +131,3 @@ export default async function TablePermission({ permission }: { permission: stri
     </>
   )
 }
-
-
-// onChange={updateFor}
